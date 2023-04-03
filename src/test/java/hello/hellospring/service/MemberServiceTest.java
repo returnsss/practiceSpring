@@ -18,6 +18,7 @@ class MemberServiceTest {
     public void beforeEach() {
         memberRepository = new MemoryMemberRepository();
         memberService = new MemberService(memberRepository);
+        //주석처리를 한줄 추가
     }
 
     @AfterEach
