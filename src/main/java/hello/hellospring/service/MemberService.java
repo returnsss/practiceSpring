@@ -5,14 +5,16 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service
+@Transactional
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
     //@Autowired
     public MemberService(MemberRepository memberRepository) {
@@ -28,6 +30,7 @@ public class MemberService {
         memberRepository.save(member);
         return member.getId();
     }
+
     private void validateDuplicateMember(Member member) { // 같은 이름이 있는 중복 회원X
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
